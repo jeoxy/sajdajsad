@@ -1,5 +1,5 @@
 local ESP = {
-    Enabled = false,
+    Enabled = true,
 	Tracers = true,
     Boxes = true,
     ShowInfo = true,
@@ -18,7 +18,7 @@ local ESP = {
 	BoxSize = Vector3.new(4, 6, 0),
     Color = Color3.fromRGB(255, 255, 255),
     TargetPlayers = true,
-    FaceCamera = true, -- i changed last time
+    FaceCamera = false, -- i changed last time
     Thickness = 1,
     AttachShift = 1,
     Objects = setmetatable({}, {__mode="kv"}),
@@ -249,7 +249,7 @@ function boxBase:Update()
 			if ESP.Info.Distance == true then
 				self.Components.Distance.Visible = true
 				self.Components.Distance.Position = Vector2.new(TagPos.X, TagPos.Y - Offset) -- nwm czy nie usunąć -offset :thinking:
-				self.Components.Distance.Text = "["..math.floor((CurrentCamera.CFrame.p - cf.p).magnitude).."]"
+				self.Components.Distance.Text = tostring(math.floor((CurrentCamera.CFrame.p - cf.p).magnitude))
 				self.Components.Distance.Color = color
 				Offset = Offset + 14
 			else
@@ -259,7 +259,7 @@ function boxBase:Update()
 			if ESP.Info.Weapons == true then
 				self.Components.Weapons.Visible = true
 				self.Components.Weapons.Position = Vector2.new(TagPos.X, TagPos.Y - Offset)
-				self.Components.Weapons.Text = "["..Char.EquippedTool.Value.."]"
+				self.Components.Weapons.Text = Char.EquippedTool.Value
 				self.Components.Weapons.Color = color
 				Offset = Offset + 14
 			else
@@ -270,7 +270,7 @@ function boxBase:Update()
 			if ESP.Info.Health == true then
 				self.Components.Health.Visible = true
 				self.Components.Health.Position = Vector2.new(TagPos.X, TagPos.Y - Offset)
-				self.Components.Health.Text = "["..math.floor(Char:FindFirstChildOfClass("Humanoid").Health).."/"..math.floor(Char:FindFirstChildOfClass("Humanoid").MaxHealth).."]"
+				self.Components.Health.Text = math.floor(Char:FindFirstChildOfClass("Humanoid").Health).."/"..math.floor(Char:FindFirstChildOfClass("Humanoid").MaxHealth)
 				self.Components.Health.Color = color
 				Offset = Offset + 14
 			else
